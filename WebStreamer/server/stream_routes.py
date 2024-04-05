@@ -46,7 +46,8 @@ async def stream_handler(request: web.Request):
         else:
             message_id = int(re.search(r"(\d+)(?:\/\S+)?", path).group(1))
             secure_hash = request.rel_url.query.get("hash")
-        return media_streamer(request, message_id, secure_hash)#web.Response(text=await render_page(message_id, secure_hash), content_type='text/html')
+        # return web.Response(text=await render_page(message_id, secure_hash), content_type='text/html')
+        return await media_streamer(request, message_id, secure_hash)
     except InvalidHash as e:
         raise web.HTTPForbidden(text=e.message)
     except FIleNotFound as e:
