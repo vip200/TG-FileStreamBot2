@@ -46,8 +46,7 @@ async def stream_handler(request: web.Request):
         else:
             message_id = int(re.search(r"(\d+)(?:\/\S+)?", path).group(1))
             secure_hash = request.rel_url.query.get("hash")
-        # return web.Response(text=await render_page(message_id, secure_hash), content_type='text/html')
-        return await media_streamer(request, message_id, secure_hash)
+        return web.Response(text=await render_page(message_id, secure_hash), content_type='text/html')
     except InvalidHash as e:
         raise web.HTTPForbidden(text=e.message)
     except FIleNotFound as e:
@@ -141,19 +140,82 @@ async def media_streamer(request: web.Request, message_id: int, secure_hash: str
         else:
             mime_type = "application/octet-stream"
             file_name = f"{secrets.token_hex(2)}.unknown"
-    return_resp = web.Response(
-        status=206 if range_header else 200,
-        body=body,
+            
+            
+            
+            
+    if range_header:
         headers={
-            "Content-Type": f"{mime_type}",
-            "Range": f"bytes={from_bytes}-{until_bytes}",
-            "Content-Range": f"bytes {from_bytes}-{until_bytes}/{file_size}",
-            "Content-Disposition": f'{disposition}; filename="{file_name}"',
-            "Accept-Ranges": "bytes",
-        },
+            'Content-Type': mime_type,
+            'Accept-Ranges': 'bytes',
+            "Content-Length": str((last_part_cut - offset) + 1),
+            'Content-Range': f'bytes {offset}-{last_part_cut}/{file_size}',
+            "Content-Disposition": f'inline; filename={file_name}' ,
+        }
+    else :
+        headers={
+            'Content-Type': mime_type
+            "Content-Length": str(file_size),
+            "Content-Disposition": f'inline; filename={file_name}' ,
+        }
+
+    print (offset,last_part_cut)
+    
+    resp = web.StreamResponse(
+        headers=headers,
+        status = 206 if range_http else 200,
     )
+    await resp.prepare(request)
 
-    if return_resp.status == 200:
-        return_resp.headers.add("Content-Length", str(file_size))
+    # cls = client.iter_download(message.media, offset=offset, request_size=1024*1024 )
 
-    return return_resp
+    # async for part in cls:
+
+        # if offset > last_part_cut:
+
+            # break
+
+        # try:
+
+            # await resp.write(part)
+
+        # except:
+
+            # break 
+
+        offset += len(part)
+        
+    return resp
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+    # return_resp = web.Response(
+        # status=206 if range_header else 200,
+        # body=body,
+        # headers={
+            # "Content-Type": f"{mime_type}",
+            # "Range": f"bytes={from_bytes}-{until_bytes}",
+            # "Content-Range": f"bytes {from_bytes}-{until_bytes}/{file_size}",
+            # "Content-Disposition": f'{disposition}; filename="{file_name}"',
+            # "Accept-Ranges": "bytes",
+        # },
+    # )
+
+    # if return_resp.status == 200:
+        # return_resp.headers.add("Content-Length", str(file_size))
+
+    # return return_resp
