@@ -147,7 +147,7 @@ async def media_streamer(request: web.Request, message_id: int, secure_hash: str
         body=body,
         headers={
             "Content-Type": f"{mime_type}",
-            "Range": f"bytes={from_bytes}-{until_bytes}",# ביטלתי
+            # "Range": f"bytes={from_bytes}-{until_bytes}",# ביטלתי
             "Content-Range": f"bytes {from_bytes}-{until_bytes}/{file_size}",
             "Content-Length": str(req_length2),# והוספתי את זה 
             "Content-Disposition": f'{disposition}; filename="{file_name}"',
