@@ -153,11 +153,11 @@ async def media_streamer(request: web.Request, message_id: int, secure_hash: str
             "Content-Disposition": f'inline; filename={file_name}' ,
         }
     else :
-        headers={
-            'Content-Type': mime_type
-            "Content-Length": str(file_size),
-            "Content-Disposition": f'inline; filename={file_name}' ,
-        }
+            headers={
+                'Content-Type': mime_type,
+                "Content-Length": str(file_size),
+                "Content-Disposition": f'inline; filename={file_name}' ,
+            }
 
     print (offset,last_part_cut)
     
