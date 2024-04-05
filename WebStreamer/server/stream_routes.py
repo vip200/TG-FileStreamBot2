@@ -183,7 +183,7 @@ async def media_streamer(request: web.Request, message_id: int, secure_hash: str
 
             # break 
 
-        offset += len(part)
+        # offset += len(part)
         
     return resp
 
