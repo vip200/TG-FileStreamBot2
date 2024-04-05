@@ -140,34 +140,21 @@ async def media_streamer(request: web.Request, message_id: int, secure_hash: str
         else:
             mime_type = "application/octet-stream"
             file_name = f"{secrets.token_hex(2)}.unknown"
-    if range_header:
+    if not mime_type:
+        mime_type = mimetypes.guess_type(file_name)[0] or "application/octet-stream"
+    return_resp = web.Response(
+        status=206 if range_header else 200,
+        body=body,
+        headers={
+            "Content-Type": f"{mime_type}",
+            "Range": f"bytes={from_bytes}-{until_bytes}",# ביטלתי
+            "Content-Range": f"bytes {from_bytes}-{until_bytes}/{file_size}",
+            "Content-Length": str(file_size),# והוספתי את זה 
+            "Content-Disposition": f'{disposition}; filename="{file_name}"',
+            "Accept-Ranges": "bytes",
+        },
+    )
 
-        return_resp = web.Response(
-            status=206 if range_header else 200,
-            body=body,
-            headers={
-                "Content-Type": f"{mime_type}",
-                # "Range": f"bytes={from_bytes}-{until_bytes}",# ביטלתי
-                "Content-Range": f"bytes {from_bytes}-{until_bytes}/{file_size}",
-                # "Content-Length": str(file_size),# והוספתי את זה 
-                "Content-Length": str((until_bytes - offset) + 1),# והוספתי את זה 
-                "Content-Disposition": f'{disposition}; filename="{file_name}"',
-                "Accept-Ranges": "bytes",
-            },
-        )
-    else:
-        return_resp = web.Response(
-            status=206 if range_header else 200,
-            body=body,
-            headers={
-                "Content-Type": f"{mime_type}",
-                "Range": f"bytes={from_bytes}-{until_bytes}",# ביטלתי
-                "Content-Range": f"bytes {from_bytes}-{until_bytes}/{file_size}",
-                "Content-Length": str(file_size),# והוספתי את זה 
-                "Content-Disposition": f'{disposition}; filename="{file_name}"',
-                "Accept-Ranges": "bytes",
-            },
-        )
     if return_resp.status == 200:
         return_resp.headers.add("Content-Length", str(file_size))
 
