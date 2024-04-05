@@ -141,13 +141,13 @@ async def media_streamer(request: web.Request, message_id: int, secure_hash: str
             mime_type = "application/octet-stream"
             file_name = f"{secrets.token_hex(2)}.unknown"
     if range_header:
-        print('111111111111111111111111111111111111')
+
         return_resp = web.Response(
             status=206 if range_header else 200,
             body=body,
             headers={
                 "Content-Type": f"{mime_type}",
-                "Range": f"bytes={from_bytes}-{until_bytes}",# ביטלתי
+                # "Range": f"bytes={from_bytes}-{until_bytes}",# ביטלתי
                 "Content-Range": f"bytes {from_bytes}-{until_bytes}/{file_size}",
                 # "Content-Length": str(file_size),# והוספתי את זה 
                 "Content-Length": str((until_bytes - offset) + 1),# והוספתי את זה 
