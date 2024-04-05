@@ -163,7 +163,7 @@ async def media_streamer(request: web.Request, message_id: int, secure_hash: str
     
     resp = web.StreamResponse(
         headers=headers,
-        status = 206 if range_http else 200,
+        status = 206 if range_header else 200,
     )
     await resp.prepare(request)
 
