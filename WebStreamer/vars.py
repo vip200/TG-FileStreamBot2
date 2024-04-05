@@ -25,7 +25,7 @@ class Var(object):
     NO_PORT = True if str(NO_PORT).lower() == "true" else False
     # if "DYNO" in environ:
     ON_HEROKU = True
-    APP_NAME = 'rrr333'#str(environ.get("APP_NAME"))
+    APP_NAME = 'rrr333-6d3a84e4ba29'#str(environ.get("APP_NAME"))
     # else:
         # ON_HEROKU = False
     FQDN = (
