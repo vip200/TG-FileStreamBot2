@@ -48,9 +48,8 @@ async def cb_data(bot, update: CallbackQuery):
         elif usr_cmd[0] == "msgdelno":
             get_msg = await bot.get_messages(chat_id=Var.BIN_CHANNEL, message_ids=int(usr_cmd[1]))
             if get_media_file_unique_id(get_msg) == usr_cmd[2]:
-                await asyncio.sleep(10)# ANONYMOUS
                 reply_markup, Stream_Text, stream_link = await gen_link(m=update, log_msg=get_msg, from_channel=False)
-
+                await asyncio.sleep(10)# ANONYMOUS
                 await update.message.edit_text(
                 text=Stream_Text,
                 disable_web_page_preview=True,
