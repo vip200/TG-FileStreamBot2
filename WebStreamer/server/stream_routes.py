@@ -134,7 +134,7 @@ async def media_streamer(request: web.Request, message_id: int, secure_hash: str
     )
 
     mime_type = file_id.mime_type
-    file_name = utils.get_name(file_id)
+    file_name = file_id.file_name#utils.get_name(file_id)
     disposition = "attachment"
 
     if not mime_type:
