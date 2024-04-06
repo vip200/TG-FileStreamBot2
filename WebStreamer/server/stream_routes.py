@@ -116,7 +116,7 @@ async def media_streamer(request: web.Request, message_id: int, secure_hash: str
         until_bytes = request.http_range.stop or file_size - 1
 
     req_length = until_bytes - from_bytes
-    req_length2 = until_bytes - from_bytes + 1
+    req_length2 = until_bytes - file_size + 1
     new_chunk_size = await utils.chunk_size(req_length)
     offset = await utils.offset_fix(from_bytes, new_chunk_size)
     first_part_cut = from_bytes - offset
@@ -147,7 +147,7 @@ async def media_streamer(request: web.Request, message_id: int, secure_hash: str
         body=body,
         headers={
             "Content-Type": f"{mime_type}",
-            # "Range": f"bytes={from_bytes}-{until_bytes}",# ביטלתי
+            "Range": f"bytes={from_bytes}-{until_bytes}",# ביטלתי
             "Content-Range": f"bytes {from_bytes}-{until_bytes}/{file_size}",
             "Content-Length": str(req_length2),# והוספתי את זה 
             "Content-Disposition": f'{disposition}; filename="{file_name}"',
