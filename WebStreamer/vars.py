@@ -10,12 +10,13 @@ class Var(object):
     MULTI_CLIENT = False
     API_ID = 22191690#int(environ.get("API_ID"))
     API_HASH = '52f7f2fd2a96132679eae22129f6f720'#str(environ.get("API_HASH"))
-    BOT_TOKEN = '5010315993:AAG5RNiWdN4LepyTgP61DoReM89HoLyUCtg'#str(environ.get("BOT_TOKEN"))
+    BOT_TOKEN = '5007581156:AAFerFKmv5I1tFf0VcWeaxFQAzSXGGGZ3Mk'#'5010315993:AAG5RNiWdN4LepyTgP61DoReM89HoLyUCtg'#str(environ.get("BOT_TOKEN"))
     SLEEP_THRESHOLD = int(environ.get("SLEEP_THRESHOLD", "60"))  # 1 minte
     WORKERS = int(environ.get("WORKERS", "6"))  # 6 workers = 6 commands at once
     BIN_CHANNEL = -1001689905120#int(
       #  environ.get("BIN_CHANNEL", None)
     #)  # you NEED to use a CHANNEL when you're using MULTI_CLIENT
+    LINK_HTTPS_CHANNEL = -1001992629352 # Http Link channel
     PORT = int(environ.get("PORT", 8080))
     BIND_ADDRESS = str(environ.get("WEB_SERVER_BIND_ADDRESS", "0.0.0.0"))
     PING_INTERVAL = int(environ.get("PING_INTERVAL", "1200"))  # 20 minutes

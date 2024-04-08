@@ -1,0 +1,308 @@
+[08/04/2024 21:49:59] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py:253} ERROR - Telegram says: [400 CHANNEL_INVALID] - The channel parameter is invalid (caused by "channels.GetChannels")
+Traceback (most recent call last):
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\advanced\resolve_peer.py", line 62, in resolve_peer
+    return await self.storage.get_peer_by_id(peer_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\storage\sqlite_storage.py", line 142, in get_peer_by_id
+    raise KeyError(f"ID not found: {peer_id}")
+KeyError: 'ID not found: -1001689905120'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py", line 240, in handler_worker
+    await handler.callback(self.client, *args)
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\bot\plugins\stream.py", line 28, in private_receive_handler
+    log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\types\messages_and_media\message.py", line 2987, in forward
+    return await self._client.forward_messages(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\messages\forward_messages.py", line 84, in forward_messages
+    to_peer=await self.resolve_peer(chat_id),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\advanced\resolve_peer.py", line 111, in resolve_peer
+    await self.invoke(
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\advanced\invoke.py", line 79, in invoke
+    r = await self.session.invoke(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\session\session.py", line 389, in invoke
+    return await self.send(query, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\session\session.py", line 357, in send
+    RPCError.raise_it(result, type(data))
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\errors\rpc_error.py", line 91, in raise_it
+    raise getattr(
+pyrogram.errors.exceptions.bad_request_400.ChannelInvalid: Telegram says: [400 CHANNEL_INVALID] - The channel parameter is invalid (caused by "channels.GetChannels")
+[08/04/2024 21:50:05] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py:253} ERROR - Telegram says: [400 CHANNEL_INVALID] - The channel parameter is invalid (caused by "channels.GetChannels")
+Traceback (most recent call last):
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\advanced\resolve_peer.py", line 62, in resolve_peer
+    return await self.storage.get_peer_by_id(peer_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\storage\sqlite_storage.py", line 142, in get_peer_by_id
+    raise KeyError(f"ID not found: {peer_id}")
+KeyError: 'ID not found: -1001689905120'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\bot\plugins\stream.py", line 52, in channel_receive_handler
+    log_msg = await broadcast.forward(chat_id=Var.BIN_CHANNEL)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\types\messages_and_media\message.py", line 2987, in forward
+    return await self._client.forward_messages(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\messages\forward_messages.py", line 84, in forward_messages
+    to_peer=await self.resolve_peer(chat_id),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\advanced\resolve_peer.py", line 111, in resolve_peer
+    await self.invoke(
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\advanced\invoke.py", line 79, in invoke
+    r = await self.session.invoke(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\session\session.py", line 389, in invoke
+    return await self.send(query, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\session\session.py", line 357, in send
+    RPCError.raise_it(result, type(data))
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\errors\rpc_error.py", line 91, in raise_it
+    raise getattr(
+pyrogram.errors.exceptions.bad_request_400.ChannelInvalid: Telegram says: [400 CHANNEL_INVALID] - The channel parameter is invalid (caused by "channels.GetChannels")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\advanced\resolve_peer.py", line 62, in resolve_peer
+    return await self.storage.get_peer_by_id(peer_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\storage\sqlite_storage.py", line 142, in get_peer_by_id
+    raise KeyError(f"ID not found: {peer_id}")
+KeyError: 'ID not found: -1001689905120'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py", line 240, in handler_worker
+    await handler.callback(self.client, *args)
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\bot\plugins\stream.py", line 73, in channel_receive_handler
+    await bot.send_message(chat_id=Var.BIN_CHANNEL, text=f"**#ᴇʀʀᴏʀ_ᴛʀᴀᴄᴇʙᴀᴄᴋ:** `{e}`", disable_web_page_preview=True, parse_mode=ParseMode.MARKDOWN)
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\messages\send_message.py", line 128, in send_message
+    peer=await self.resolve_peer(chat_id),
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\advanced\resolve_peer.py", line 111, in resolve_peer
+    await self.invoke(
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\advanced\invoke.py", line 79, in invoke
+    r = await self.session.invoke(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\session\session.py", line 389, in invoke
+    return await self.send(query, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\session\session.py", line 357, in send
+    RPCError.raise_it(result, type(data))
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\errors\rpc_error.py", line 91, in raise_it
+    raise getattr(
+pyrogram.errors.exceptions.bad_request_400.ChannelInvalid: Telegram says: [400 CHANNEL_INVALID] - The channel parameter is invalid (caused by "channels.GetChannels")
+[08/04/2024 21:51:32] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py:253} ERROR - Telegram says: [400 CHANNEL_INVALID] - The channel parameter is invalid (caused by "channels.GetChannels")
+Traceback (most recent call last):
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\advanced\resolve_peer.py", line 62, in resolve_peer
+    return await self.storage.get_peer_by_id(peer_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\storage\sqlite_storage.py", line 142, in get_peer_by_id
+    raise KeyError(f"ID not found: {peer_id}")
+KeyError: 'ID not found: -1001689905120'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\bot\plugins\stream.py", line 52, in channel_receive_handler
+    log_msg = await broadcast.forward(chat_id=Var.BIN_CHANNEL)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\types\messages_and_media\message.py", line 2987, in forward
+    return await self._client.forward_messages(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\messages\forward_messages.py", line 84, in forward_messages
+    to_peer=await self.resolve_peer(chat_id),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\advanced\resolve_peer.py", line 111, in resolve_peer
+    await self.invoke(
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\advanced\invoke.py", line 79, in invoke
+    r = await self.session.invoke(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\session\session.py", line 389, in invoke
+    return await self.send(query, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\session\session.py", line 357, in send
+    RPCError.raise_it(result, type(data))
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\errors\rpc_error.py", line 91, in raise_it
+    raise getattr(
+pyrogram.errors.exceptions.bad_request_400.ChannelInvalid: Telegram says: [400 CHANNEL_INVALID] - The channel parameter is invalid (caused by "channels.GetChannels")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\advanced\resolve_peer.py", line 62, in resolve_peer
+    return await self.storage.get_peer_by_id(peer_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\storage\sqlite_storage.py", line 142, in get_peer_by_id
+    raise KeyError(f"ID not found: {peer_id}")
+KeyError: 'ID not found: -1001689905120'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py", line 240, in handler_worker
+    await handler.callback(self.client, *args)
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\bot\plugins\stream.py", line 73, in channel_receive_handler
+    await bot.send_message(chat_id=Var.BIN_CHANNEL, text=f"**#ᴇʀʀᴏʀ_ᴛʀᴀᴄᴇʙᴀᴄᴋ:** `{e}`", disable_web_page_preview=True, parse_mode=ParseMode.MARKDOWN)
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\messages\send_message.py", line 128, in send_message
+    peer=await self.resolve_peer(chat_id),
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\advanced\resolve_peer.py", line 111, in resolve_peer
+    await self.invoke(
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\advanced\invoke.py", line 79, in invoke
+    r = await self.session.invoke(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\session\session.py", line 389, in invoke
+    return await self.send(query, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\session\session.py", line 357, in send
+    RPCError.raise_it(result, type(data))
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\errors\rpc_error.py", line 91, in raise_it
+    raise getattr(
+pyrogram.errors.exceptions.bad_request_400.ChannelInvalid: Telegram says: [400 CHANNEL_INVALID] - The channel parameter is invalid (caused by "channels.GetChannels")
+[08/04/2024 21:51:37] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py:253} ERROR - Telegram says: [400 CHANNEL_INVALID] - The channel parameter is invalid (caused by "channels.GetChannels")
+Traceback (most recent call last):
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\advanced\resolve_peer.py", line 62, in resolve_peer
+    return await self.storage.get_peer_by_id(peer_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\storage\sqlite_storage.py", line 142, in get_peer_by_id
+    raise KeyError(f"ID not found: {peer_id}")
+KeyError: 'ID not found: -1001689905120'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py", line 240, in handler_worker
+    await handler.callback(self.client, *args)
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\bot\plugins\stream.py", line 28, in private_receive_handler
+    log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\types\messages_and_media\message.py", line 2987, in forward
+    return await self._client.forward_messages(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\messages\forward_messages.py", line 84, in forward_messages
+    to_peer=await self.resolve_peer(chat_id),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\advanced\resolve_peer.py", line 111, in resolve_peer
+    await self.invoke(
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\advanced\invoke.py", line 79, in invoke
+    r = await self.session.invoke(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\session\session.py", line 389, in invoke
+    return await self.send(query, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\session\session.py", line 357, in send
+    RPCError.raise_it(result, type(data))
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\errors\rpc_error.py", line 91, in raise_it
+    raise getattr(
+pyrogram.errors.exceptions.bad_request_400.ChannelInvalid: Telegram says: [400 CHANNEL_INVALID] - The channel parameter is invalid (caused by "channels.GetChannels")
+[08/04/2024 21:51:43] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 21:52:28] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 21:54:16] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 21:55:20] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 21:58:04] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 21:58:21] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py:253} ERROR - name 'log_msg' is not defined
+Traceback (most recent call last):
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py", line 240, in handler_worker
+    await handler.callback(self.client, *args)
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\bot\plugins\stream.py", line 30, in private_receive_handler
+    await log_msg.reply_text(text=f"**RᴇQᴜᴇꜱᴛᴇᴅ ʙʏ :** [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**Uꜱᴇʀ ɪᴅ :** `{m.from_user.id}`\n**Dᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ :** {stream_link}", disable_web_page_preview=True, parse_mode=ParseMode.MARKDOWN, quote=True)
+          ^^^^^^^
+NameError: name 'log_msg' is not defined
+[08/04/2024 22:05:16] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 22:12:19] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 22:13:18] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 22:13:23] {C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\__main__.py:77} ERROR - keyword argument repeated: parse_mode (stream.py, line 34)
+[08/04/2024 22:13:44] {C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\__main__.py:77} ERROR - keyword argument repeated: parse_mode (stream.py, line 34)
+[08/04/2024 22:14:07] {C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\__main__.py:77} ERROR - keyword argument repeated: parse_mode (stream.py, line 34)
+[08/04/2024 22:14:48] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 22:14:57] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py:253} ERROR - SendMessage.send_message() got an unexpected keyword argument 'quote'
+Traceback (most recent call last):
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py", line 240, in handler_worker
+    await handler.callback(self.client, *args)
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\bot\plugins\stream.py", line 33, in private_receive_handler
+    await c.send_message(chat_id=Var.BIN_CHANNEL, text=Stream_Text,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\sync.py", line 53, in async_to_sync_wrap
+    coroutine = function(*args, **kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: SendMessage.send_message() got an unexpected keyword argument 'quote'
+[08/04/2024 22:15:11] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 22:15:53] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 22:18:27] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 22:23:19] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 22:28:58] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 22:29:10] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py:253} ERROR - name 'Stream_Text' is not defined
+Traceback (most recent call last):
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py", line 240, in handler_worker
+    await handler.callback(self.client, *args)
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\bot\plugins\stream.py", line 33, in private_receive_handler
+    await c.send_message(chat_id=Var.BIN_CHANNEL, text=Stream_Text,
+                                                       ^^^^^^^^^^^
+NameError: name 'Stream_Text' is not defined
+[08/04/2024 22:30:20] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 22:30:27] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py:253} ERROR - '>' not supported between instances of 'str' and 'int'
+Traceback (most recent call last):
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py", line 240, in handler_worker
+    await handler.callback(self.client, *args)
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\bot\plugins\stream.py", line 29, in private_receive_handler
+    reply_markup, Stream_Text, stream_link = await gen_link(m=m, log_msg='', from_channel=False)
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\utils\file_properties.py", line 80, in gen_link
+    file_size = humanbytes(get_media_file_size(log_msg))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\utils\human_readable.py", line 11, in humanbytes
+    while size > power:
+          ^^^^^^^^^^^^
+TypeError: '>' not supported between instances of 'str' and 'int'
+[08/04/2024 22:31:35] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 22:31:41] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py:253} ERROR - gen_link() missing 1 required positional argument: 'log_msg'
+Traceback (most recent call last):
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py", line 240, in handler_worker
+    await handler.callback(self.client, *args)
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\bot\plugins\stream.py", line 29, in private_receive_handler
+    reply_markup, Stream_Text, stream_link = await gen_link(m=m,  from_channel=False)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: gen_link() missing 1 required positional argument: 'log_msg'
+[08/04/2024 22:31:58] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 22:32:03] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py:253} ERROR - '>' not supported between instances of 'str' and 'int'
+Traceback (most recent call last):
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py", line 240, in handler_worker
+    await handler.callback(self.client, *args)
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\bot\plugins\stream.py", line 29, in private_receive_handler
+    reply_markup, Stream_Text, stream_link = await gen_link(m=m, log_msg=Var.BIN_CHANNEL, from_channel=False)
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\utils\file_properties.py", line 80, in gen_link
+    file_size = humanbytes(get_media_file_size(log_msg))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\utils\human_readable.py", line 11, in humanbytes
+    while size > power:
+          ^^^^^^^^^^^^
+TypeError: '>' not supported between instances of 'str' and 'int'
+[08/04/2024 22:32:15] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 22:34:03] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...
+[08/04/2024 22:34:10] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py:253} ERROR - '>' not supported between instances of 'str' and 'int'
+Traceback (most recent call last):
+  File "C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\dispatcher.py", line 240, in handler_worker
+    await handler.callback(self.client, *args)
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\bot\plugins\stream.py", line 29, in private_receive_handler
+    reply_markup, Stream_Text, stream_link = await gen_link(m=m, log_msg=log_msg, from_channel=False)
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\utils\file_properties.py", line 80, in gen_link
+    file_size = humanbytes(get_media_file_size(log_msg))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\wizard\Bot\FileToLink\pyrogram\test\TG-FileStreamBot\WebStreamer\utils\human_readable.py", line 11, in humanbytes
+    while size > power:
+          ^^^^^^^^^^^^
+TypeError: '>' not supported between instances of 'str' and 'int'
+[08/04/2024 22:42:04] {C:\Users\yossi\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyrogram\methods\utilities\idle.py:75} INFO - Stop signal received (SIGINT). Exiting...

@@ -25,10 +25,18 @@ from pyrogram.enums.parse_mode import ParseMode
 )
 async def private_receive_handler(c: Client, m: Message):
     try:
+        # מעביר הודעה ולינק לערוץ משני
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
         reply_markup, Stream_Text, stream_link = await gen_link(m=m, log_msg=log_msg, from_channel=False)
         await log_msg.reply_text(text=f"**RᴇQᴜᴇꜱᴛᴇᴅ ʙʏ :** [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**Uꜱᴇʀ ɪᴅ :** `{m.from_user.id}`\n**Dᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ :** {stream_link}", disable_web_page_preview=True, parse_mode=ParseMode.MARKDOWN, quote=True)
         # await asyncio.sleep(1.5)# ANONYMOUS
+        
+        # מעביר לינק הורדה לערוץ לינקים ישירים
+        await c.send_message(chat_id=Var.LINK_HTTPS_CHANNEL, text=Stream_Text,
+            parse_mode=ParseMode.HTML,
+            disable_web_page_preview=True)
+        
+        # מחזיר לינק לבוט הראשי
         await m.reply_text(
             text=Stream_Text,
             parse_mode=ParseMode.HTML,
