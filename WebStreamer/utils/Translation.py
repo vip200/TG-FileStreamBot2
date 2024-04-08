@@ -38,6 +38,7 @@ class Language(object):
 <i><u>𝗬𝗼𝘂𝗿 𝗟𝗶𝗻𝗸 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 !</u></i>\n
 <b>📂 File Name :</b> {}\n
 <b>📦 File Size :</b> {}\n
+<b>⚜ File Id :</b> {}\n
 <b>📥 Download :</b> {}\n
 <b>🖥WATCH :</b> {}"""
 
