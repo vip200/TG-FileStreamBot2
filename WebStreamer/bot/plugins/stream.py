@@ -33,7 +33,7 @@ async def private_receive_handler(c: Client, m: Message):
 
     members=['384403734','1229060184,838481324,5667480303','5771387214','5984604232','5941680786','6022195851','6217448590']
     for i in members:
-        if str(m.from_user.id) not in i:
+        if str(m.from_user.id) in i:
             await m.reply("אין הרשאה")
             return
     try:
