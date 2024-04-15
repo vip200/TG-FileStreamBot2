@@ -24,12 +24,12 @@ from pyrogram.enums.parse_mode import ParseMode
     group=4,
 )
 async def private_receive_handler(c: Client, m: Message):
-    try:
-        check_member = await c.get_chat_member(-1002013292737, m.from_user.id)
-    except:
+    # try:
+        # check_member = await c.get_chat_member(-1002013292737, m.from_user.id)
+    # except:
         
-        await m.reply("אין הרשאה")
-        return
+        # await m.reply("אין הרשאה")
+        # return
     try:
         # מעביר הודעה ולינק לערוץ משני
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
