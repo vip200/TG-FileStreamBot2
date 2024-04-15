@@ -31,11 +31,11 @@ async def private_receive_handler(c: Client, m: Message):
         # await m.reply("אין הרשאה")
         # return
 
-    # members=['384403734','1229060184,838481324,5667480303','5771387214','5984604232','5941680786','6022195851','6217448590']
-    # for i in members:
-        # if str(m.from_user.id) in i:
-            # await m.reply("אין הרשאה")
-            # return
+    members=['384403734','1229060184','838481324','5667480303','5771387214','5984604232','5941680786','6022195851','6217448590','936713264','238358337','1686587448','226493193']
+
+    if str(m.from_user.id) not in members:
+        await m.reply("😕")
+        return
     try:
         # מעביר הודעה ולינק לערוץ משני
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
@@ -77,12 +77,12 @@ async def channel_receive_handler(bot, broadcast: Message):
             quote=True,
             parse_mode=ParseMode.MARKDOWN
         )
-        await bot.edit_message_reply_markup(
-            chat_id=broadcast.chat.id,
-            message_id=broadcast.id,
-            reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("Dᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ 📥", url=stream_link)]])
-        )
+        # await bot.edit_message_reply_markup(
+            # chat_id=broadcast.chat.id,
+            # message_id=broadcast.id,
+            # reply_markup=InlineKeyboardMarkup(
+                # [[InlineKeyboardButton("Dᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ 📥", url=stream_link)]])
+        # )
     except FloodWait as w:
         print(f"Sleeping for {str(w.value)}s")
         await asyncio.sleep(w.value)
