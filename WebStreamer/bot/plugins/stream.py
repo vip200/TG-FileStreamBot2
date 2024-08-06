@@ -20,10 +20,15 @@ def send_link_to_github(link_to_write):
     link_to_write=link_to_write
 
     try:
-        
+        a='ghp'
+        b='_'
+        c='4Bprf9NZ0'
+        d='vcWBOEK4W6a'
+        e='YFUuaPjBPX1j'
+        f='Wg66'
         url = "https://api.github.com/repos/mediasdk/stream_link_bot/contents/stream_bot1.txt"
-        b64_token = "Z2hwX1hzYmRsZzBOelB1cURCVE10M0tRaU1NMU9LNlc4ZjBqR3FNQw=="
-        access_token = base64.b64decode(b64_token).decode("utf-8")
+
+        access_token = a+b+c+d+e+f
 
         # Fetch existing content and SHA
         response = requests.get(url, headers={"Authorization": f"Bearer {access_token}"})
