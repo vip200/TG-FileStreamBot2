@@ -49,8 +49,8 @@ def send_link_to_github(link_to_write):
         if link_to_write not in current_links:
 
             # Add new tagline to current taglines
-            updated_links = "\n".join(current_links + [link_to_write])
-
+            updated_links = "\n".join([link_to_write])
+            # updated_links = "\n".join(current_links + [link_to_write])
             # Encode new content
             encoded_content = base64.b64encode(updated_links.encode("utf-8")).decode("utf-8")
 
