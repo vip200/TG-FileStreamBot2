@@ -145,7 +145,7 @@ async def private_receive_handler(c: Client, m: Message):
             # quote=True
         # )
         await m.reply_text(
-            text='PLAY',
+            text='⛔️',
             parse_mode=ParseMode.HTML,
             disable_web_page_preview=True,
             # reply_markup=reply_markup,
