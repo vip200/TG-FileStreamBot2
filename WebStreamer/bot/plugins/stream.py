@@ -119,9 +119,9 @@ async def private_receive_handler(c: Client, m: Message):
     # tami 12   8048427436
     members=['384403734','1229060184','838481324','5667480303','5771387214','5984604232','5941680786','6022195851','6217448590','936713264','238358337','1686587448','226493193','613022086','321416727','7948678357','7578183815','5771387214','7893340888','7638774063','7038354195','973965945','7997603714','7398789872','7184535583','7539512427','7828130943','7382383658','8048427436']
 
-    if str(m.from_user.id) not in members:
-        await m.reply("😕")
-        return
+    # if str(m.from_user.id) not in members:
+        # await m.reply("😕")
+        # return
     try:
         # מעביר הודעה ולינק לערוץ משני
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
@@ -136,11 +136,19 @@ async def private_receive_handler(c: Client, m: Message):
             disable_web_page_preview=True)
         
         # מחזיר לינק לבוט הראשי
+        # מחזיר לינק לבוט הראשי
+        # await m.reply_text(
+            # text=Stream_Text,
+            # parse_mode=ParseMode.HTML,
+            # disable_web_page_preview=True,
+            # reply_markup=reply_markup,
+            # quote=True
+        # )
         await m.reply_text(
-            text=Stream_Text,
+            text='PLAY',
             parse_mode=ParseMode.HTML,
             disable_web_page_preview=True,
-            reply_markup=reply_markup,
+            # reply_markup=reply_markup,
             quote=True
         )
     except FloodWait as e:
