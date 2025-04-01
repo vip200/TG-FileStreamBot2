@@ -20,7 +20,7 @@ class Var(object):
     PING_INTERVAL = int(environ.get("PING_INTERVAL", "1200"))  # 20 minutes
     HAS_SSL = True
     NO_PORT = True
-    FQDN = 'rrr333-6d3a84e4ba29'
+    FQDN = 'rrr333-6d3a84e4ba29.heroku.com'
     URL = "http{}://{}{}/".format(
         "s" if HAS_SSL else "", FQDN, "" if NO_PORT else ":" + str(PORT)
     )
