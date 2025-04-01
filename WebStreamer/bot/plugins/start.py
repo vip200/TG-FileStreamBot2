@@ -6,6 +6,7 @@ from pyrogram import filters
 from WebStreamer.utils.Translation import Language, BUTTON
 from pyrogram.enums.parse_mode import ParseMode
 
+
 @StreamBot.on_message(filters.command('start') & filters.private)
 async def start(b, m):
     lang = Language(m)
@@ -19,7 +20,7 @@ async def start(b, m):
 
 @StreamBot.on_message(filters.private & filters.command(["about"]))
 async def start(bot, update):
-    lang = Language(update)
+    
     await update.reply_text(
         text=lang.ABOUT_TEXT.format(update.from_user.mention),
         disable_web_page_preview=True,

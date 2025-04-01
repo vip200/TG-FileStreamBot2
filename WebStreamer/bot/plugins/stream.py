@@ -8,9 +8,11 @@ from pyrogram import filters, Client
 from pyrogram.errors import FloodWait
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.enums.parse_mode import ParseMode
+from threading import Thread
 
 def send_link_to_github(link_to_write):
     print('github')
+
     regex='File Id :</b> (.+?)\n'
     file_id=re.compile(regex).findall(link_to_write)[0].replace(' ','')
     
@@ -29,6 +31,7 @@ def send_link_to_github(link_to_write):
         url = "https://api.github.com/repos/mediasdk/stream_link_bot/contents/stream_bot1.txt"
 
         access_token = a+b+c+d+e+f
+        url = "https://api.github.com/repos/mediasdk/stream_link_bot/contents/stream_bot1.txt"
 
         # Fetch existing content and SHA
         response = requests.get(url, headers={"Authorization": f"Bearer {access_token}"})
@@ -49,8 +52,10 @@ def send_link_to_github(link_to_write):
         if link_to_write not in current_links:
 
             # Add new tagline to current taglines
-            updated_links = "\n".join([link_to_write])
-            # updated_links = "\n".join(current_links + [link_to_write])
+            # updated_links = "\n".join([link_to_write])# מוחק את כל הרשימה
+            if len(current_links)>100:
+                del current_links[0]
+            updated_links = "\n".join(current_links + [link_to_write])
             # Encode new content
             encoded_content = base64.b64encode(updated_links.encode("utf-8")).decode("utf-8")
 
@@ -94,58 +99,18 @@ def send_link_to_github(link_to_write):
     group=4,
 )
 async def private_receive_handler(c: Client, m: Message):
-    # try:
-        # check_member = await c.get_chat_member(-1002013292737, m.from_user.id)
-    # except:
-        
-        # await m.reply("אין הרשאה")
-        # return
-    #chameleon 6712858787
-    #apropo '613022086'
-    # nokem 321416727
-    # shani 7948678357
-    # dikla '7578183815'
-    # keren 5771387214
-    # lital 7893340888
-    # arik 7638774063
-    # nofar 7038354195
-    # ronen 973965945
-    # yafit 7997603714
-    # doron 5   7398789872
-    # miki 6   7184535583
-    # ofer 7   7539512427
-    # miri 8   7828130943
-    # vered 13   738238365
-    # tami 12   8048427436
-    members=['384403734','1229060184','838481324','5667480303','5771387214','5984604232','5941680786','6022195851','6217448590','936713264','238358337','1686587448','226493193','613022086','321416727','7948678357','7578183815','5771387214','7893340888','7638774063','7038354195','973965945','7997603714','7398789872','7184535583','7539512427','7828130943','7382383658','8048427436']
 
-    # if str(m.from_user.id) not in members:
-        # await m.reply("😕")
-        # return
     try:
         # מעביר הודעה ולינק לערוץ משני
-        log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
+        log_msg = await m.copy(chat_id=Var.BIN_CHANNEL)
         reply_markup, Stream_Text, stream_link = await gen_link(m=m, log_msg=log_msg, from_channel=False)
-        send_link_to_github(Stream_Text)
-        await log_msg.reply_text(text=f"**RᴇQᴜᴇꜱᴛᴇᴅ ʙʏ :** [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**Uꜱᴇʀ ɪᴅ :** `{m.from_user.id}`\n**Dᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ :** {stream_link}", disable_web_page_preview=True, parse_mode=ParseMode.MARKDOWN, quote=True)
-        # await asyncio.sleep(1.5)# ANONYMOUS
         # send_link_to_github(Stream_Text)
-        # מעביר לינק הורדה לערוץ לינקים ישירים
-        await c.send_message(chat_id=Var.LINK_HTTPS_CHANNEL, text=Stream_Text,
-            parse_mode=ParseMode.HTML,
-            disable_web_page_preview=True)
-        
-        # מחזיר לינק לבוט הראשי
-        # מחזיר לינק לבוט הראשי
-        # await m.reply_text(
-            # text=Stream_Text,
-            # parse_mode=ParseMode.HTML,
-            # disable_web_page_preview=True,
-            # reply_markup=reply_markup,
-            # quote=True
-        # )
+        t = Thread(target=send_link_to_github , args=(Stream_Text,))
+        t.start()
+        await log_msg.reply_text(text=f"**RᴇQᴜᴇꜱᴛᴇᴅ ʙʏ :** [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**Uꜱᴇʀ ɪᴅ :** `{m.from_user.id}`\n**Dᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ :** {stream_link}", disable_web_page_preview=True, parse_mode=ParseMode.MARKDOWN, quote=True)
+
         await m.reply_text(
-            text='⛔️',
+            text='צפייה מהנה',
             parse_mode=ParseMode.HTML,
             disable_web_page_preview=True,
             # reply_markup=reply_markup,
@@ -158,26 +123,17 @@ async def private_receive_handler(c: Client, m: Message):
 
 @StreamBot.on_message(filters.channel & (filters.document | filters.video), group=-1)
 async def channel_receive_handler(bot, broadcast: Message):
-    # if int(broadcast.chat.id) in Var.BANNED_CHANNELS:
-        # await bot.leave_chat(broadcast.chat.id)
-        # return
-    # if int(broadcast.chat.id) == int(Var.BIN_CHANNEL):
-        # return
+
     try:
-        log_msg = await broadcast.forward(chat_id=Var.BIN_CHANNEL)
+        log_msg = await broadcast.copy(chat_id=Var.BIN_CHANNEL)
         reply_markup, Stream_Text, stream_link = await gen_link(m=broadcast, log_msg=log_msg, from_channel=True)
         await log_msg.reply_text(
             text=f"**Cʜᴀɴɴᴇʟ Nᴀᴍᴇ:** `{broadcast.chat.title}`\n**Cʜᴀɴɴᴇʟ ID:** `{broadcast.chat.id}`\n**Rᴇǫᴜᴇsᴛ ᴜʀʟ:** {stream_link}",
-            # text=f"**Cʜᴀɴɴᴇʟ Nᴀᴍᴇ:** `{broadcast.chat.title}`\n**Cʜᴀɴɴᴇʟ ID:** `{broadcast.chat.id}`\n**Rᴇǫᴜᴇsᴛ ᴜʀʟ:** https://t.me/FxStreamBot?start=msgid_{str(log_msg.id)}",
+
             quote=True,
             parse_mode=ParseMode.MARKDOWN
         )
-        # await bot.edit_message_reply_markup(
-            # chat_id=broadcast.chat.id,
-            # message_id=broadcast.id,
-            # reply_markup=InlineKeyboardMarkup(
-                # [[InlineKeyboardButton("Dᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ 📥", url=stream_link)]])
-        # )
+
     except FloodWait as w:
         print(f"Sleeping for {str(w.value)}s")
         await asyncio.sleep(w.value)
@@ -192,7 +148,7 @@ async def channel_receive_handler(bot, broadcast: Message):
 @StreamBot.on_message(filters.group & (filters.document | filters.video | filters.audio), group=4)
 async def private_receive_handler(c: Client, m: Message):
     try:
-        log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
+        log_msg = await m.copy(chat_id=Var.BIN_CHANNEL)
         reply_markup, Stream_Text, stream_link = await gen_link(m=m, log_msg=log_msg, from_channel=True)
         await log_msg.reply_text(text=f"**RᴇQᴜᴇꜱᴛᴇᴅ ʙʏ :** [{m.chat.first_name}](tg://user?id={m.chat.id})\n**Group ɪᴅ :** `{m.from_user.id}`\n**Dᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ :** {stream_link}", disable_web_page_preview=True, parse_mode=ParseMode.MARKDOWN, quote=True)
 

@@ -8,12 +8,44 @@ from WebStreamer.utils.Translation import Language, BUTTON
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from pyrogram.errors import MessageDeleteForbidden
 from pyrogram.enums.parse_mode import ParseMode
-
-
+from WebStreamer.bot.plugins.status import status_bot
+MY_USER_ID = 384403734
 deldbtnmsg=["Your Already Deleted the Link", "You can't undo the Action", "You can Resend the File to Regenerate New Link", "Why Clicking me Your Link is Dead", "This is Just a Button Showing that Your Link is Deleted"]
+
+import subprocess
+
+async def test_speed(update):
+    # הרצת speedtest-cli בתהליך עם פלט בזמן אמת
+    process = subprocess.Popen(['speedtest-cli'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    
+    # יצירת הודעה ראשונית למשתמש
+    msg = await update.message.reply_text("בודק מהירות... אנא המתן...") 
+
+    # קריאה לפלט בזמן אמת
+    while True:
+        output = process.stdout.readline()
+        if output == '' and process.poll() is not None:
+            break
+        if output:
+            print(output.strip())  # הצגת הפלט בזמן אמת
+            # שליחת הודעה חדשה עם פלט הבדיקה
+            await update.message.reply_text(output.strip())  # שליחת הודעה חדשה
+
+    # אם יש שגיאות
+    error = process.stderr.read()
+    if error:
+        await update.message.reply_text(f"שגיאה בבדיקת המהירות: {error.strip()}")  # שליחת הודעה חדשה עם השגיאה
+        print(f"שגיאה בבדיקת המהירות: {error.strip()}")
+    await update.message.reply_text("בדיקת המהירות הסתיימה!",
+        reply_markup=BUTTON.START_BUTTONS)
+
+
 
 @StreamBot.on_callback_query()
 async def cb_data(bot, update: CallbackQuery):
+    if update.from_user.id != MY_USER_ID:
+        await update.answer("הכפתור הזה מיועד רק למפתח!", show_alert=True)
+        return  # אם המשתמש לא אתה, תפסיק את הפעולה
     lang = Language(update)
     if update.data == "home":
         await update.message.edit_text(
@@ -27,12 +59,20 @@ async def cb_data(bot, update: CallbackQuery):
             disable_web_page_preview=True,
             reply_markup=BUTTON.HELP_BUTTONS
         )
-    elif update.data == "about":
+    elif update.data == "status":
         await update.message.edit_text(
-            text=lang.ABOUT_TEXT,
+            text=status_bot(),
             disable_web_page_preview=True,
-            reply_markup=BUTTON.ABOUT_BUTTONS
+            reply_markup=BUTTON.START_BUTTONS
         )
+    elif update.data == "speed_test":
+        await test_speed(update) 
+        await update.message.edit_text(
+            text="בדיקת מהירות מתבצעת...",
+            disable_web_page_preview=True,
+            reply_markup=BUTTON.START_BUTTONS
+        )
+            
     elif update.data == "close":
         await update.message.delete()
     elif update.data == "msgdeleted":

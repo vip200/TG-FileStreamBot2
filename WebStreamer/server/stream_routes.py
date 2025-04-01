@@ -6,7 +6,7 @@ import time
 import math
 import logging
 import secrets
-import mimetypes
+import mimetypes,json
 from aiohttp import web
 from aiohttp.http_exceptions import BadStatusLine
 from WebStreamer.bot import multi_clients, work_loads
@@ -17,23 +17,39 @@ from WebStreamer.utils.render_template import render_page
 
 routes = web.RouteTableDef()
 
+
+
 @routes.get("/", allow_head=True)
 async def root_route_handler(_):
-    return web.json_response(
-        {
-            "server_status": "running",
-            "uptime": utils.get_readable_time(time.time() - StartTime),
-            "telegram_bot": "@" + StreamBot.username,
-            "connected_bots": len(multi_clients),
-            "loads": dict(
-                ("bot" + str(c + 1), l)
-                for c, (_, l) in enumerate(
-                    sorted(work_loads.items(), key=lambda x: x[1], reverse=True)
-                )
-            ),
-            "version": __version__,
-        }
-    )
+    total = sum(work_loads.values())  # ????? ?? ??????? ??????
+    sorted_loads = {
+        f"Bot{c + 1}": l for c, (_, l) in 
+        enumerate(sorted(work_loads.items(), key=lambda x: x[1], reverse=True))
+    }
+
+    data = {
+        "Uptime": utils.get_readable_time(time.time() - StartTime),
+        "Connected_Bots": len(multi_clients),
+        "Loads": sorted_loads,
+        "Total_Connected": total
+    }
+    json_str = json.dumps(data, indent=4, ensure_ascii=False)
+    html_content = f"""
+    <html>
+    <head>
+        <title>FileStreamBot 2</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/themes/prism-okaidia.min.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/components/prism-json.min.js"></script>
+    </head>
+    <body>
+        <h1>FileStreamBot 2</h1>
+        <pre><code class="language-json">{json_str}</code></pre>
+    </body>
+    </html>
+    """
+    return web.Response(text=html_content, content_type='text/html')
+
 
 @routes.get(r"/watch/{path:\S+}", allow_head=True)
 async def stream_handler(request: web.Request):
@@ -113,7 +129,7 @@ async def media_streamer(request: web.Request, message_id: int, secure_hash: str
         until_bytes = int(until_bytes) if until_bytes else file_size - 1
     else:
         from_bytes = request.http_range.start or 0
-        until_bytes = request.http_range.stop or file_size - 1
+        until_bytes = (request.http_range.stop or file_size) - 1
     if (until_bytes > file_size) or (from_bytes < 0) or (until_bytes < from_bytes):
         return web.Response(
             status=416,

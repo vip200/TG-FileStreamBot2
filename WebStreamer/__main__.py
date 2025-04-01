@@ -1,8 +1,8 @@
 # This file is a part of TG-FileStreamBot
 
-import sys
+import sys,json,codecs
 import asyncio
-import logging
+import logging,time
 from .vars import Var
 from aiohttp import web
 from pyrogram import idle
@@ -10,6 +10,7 @@ from WebStreamer import utils
 from WebStreamer import StreamBot
 from WebStreamer.server import web_server
 from WebStreamer.bot.clients import initialize_clients
+from pyrogram.errors import FloodWait
 
 
 logging.basicConfig(
@@ -31,6 +32,17 @@ server = web.AppRunner(web_server())
 #else:
 loop = asyncio.get_event_loop()
 
+async def send_startup_message():
+    try:
+        channel_id = Var.BIN_CHANNEL  # ה-ID של הערוץ שלך
+        message_text = "✅ הבוט הופעל בהצלחה!"
+        await StreamBot.send_message(channel_id, message_text)
+        logging.info("הודעת הפעלה נשלחה לערוץ בהצלחה.")
+    except Exception as e:
+        logging.error(f"שגיאה בשליחת ההודעה לערוץ: {e}")
+
+
+
 async def start_services():
     print()
     print("-------------------- Initializing Telegram Bot --------------------")
@@ -44,13 +56,9 @@ async def start_services():
     )
     await initialize_clients()
     print("------------------------------ DONE ------------------------------")
-    if Var.ON_HEROKU:
-        print("------------------ Starting Keep Alive Service ------------------")
-        print()
-        asyncio.create_task(utils.ping_server())
     print("--------------------- Initalizing Web Server ---------------------")
     await server.setup()
-    bind_address = "0.0.0.0" if Var.ON_HEROKU else Var.BIND_ADDRESS
+    bind_address = Var.BIND_ADDRESS
     await web.TCPSite(server, bind_address, Var.PORT).start()
     print("------------------------------ DONE ------------------------------")
     print()
@@ -59,9 +67,9 @@ async def start_services():
     if bot_info.dc_id:
         print("                        DC ID =>> {}".format(str(bot_info.dc_id)))
     print("                        server ip =>> {}".format(bind_address, Var.PORT))
-    if Var.ON_HEROKU:
-        print("                        app running on =>> {}".format(Var.FQDN))
+
     print("------------------------------------------------------------------")
+    await send_startup_message()
     await idle()
 
 async def cleanup():
@@ -69,13 +77,22 @@ async def cleanup():
     await StreamBot.stop()
 
 if __name__ == "__main__":
+    
     try:
         loop.run_until_complete(start_services())
     except KeyboardInterrupt:
         pass
+
+    except FloodWait as e:
+        print(e.value)
+        time.sleep(e.value)  # Wait "value" seconds before continuing
+        loop.run_until_complete(start_services())
+        
     except Exception as err:
         logging.error(err.with_traceback(None))
+    
     finally:
+
         loop.run_until_complete(cleanup())
         loop.stop()
         print("------------------------ Stopped Services ------------------------")

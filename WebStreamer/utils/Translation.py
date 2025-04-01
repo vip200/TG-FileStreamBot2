@@ -13,12 +13,7 @@ class Language(object):
     available=['en', 'Test']
 
     class en(object):
-        START_TEXT = """
-<i>👋 Hᴇʏ,</i>{}\n
-<i>I'm Telegram Files Streaming Bot As Well Direct Links Generator</i>\n
-<i>Cʟɪᴄᴋ ᴏɴ Hᴇʟᴘ ᴛᴏ ɢᴇᴛ ᴍᴏʀᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ</i>\n
-<i><u>𝗪𝗔𝗥𝗡𝗜𝗡𝗚 🚸</u></i>\n
-<b>🔞 Pʀᴏɴ ᴄᴏɴᴛᴇɴᴛꜱ ʟᴇᴀᴅꜱ ᴛᴏ ᴘᴇʀᴍᴀɴᴇɴᴛ ʙᴀɴ ʏᴏᴜ.</b>\n\n"""
+        START_TEXT = "שלום, אני בוט שעוזר לנגן תכנים 😀"
 
         HELP_TEXT = """
 <i>- Sᴇɴᴅ ᴍᴇ ᴀɴʏ ꜰɪʟᴇ (ᴏʀ) ᴍᴇᴅɪᴀ ꜰʀᴏᴍ ᴛᴇʟᴇɢʀᴀᴍ.</i>
@@ -53,14 +48,14 @@ class Language(object):
 # ------------------------------------------------------------------------------
 
 class BUTTON(object):
+
     START_BUTTONS = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton('Hᴇʟᴘ', callback_data='help'),
-        InlineKeyboardButton('Aʙᴏᴜᴛ', callback_data='about'),
-        InlineKeyboardButton('Cʟᴏsᴇ', callback_data='close')
+        InlineKeyboardButton("Speed Test", callback_data='speed_test'),
+        InlineKeyboardButton('Status', callback_data='status')
         ],
-        [InlineKeyboardButton("📢 Bot Channel", url=f'https://t.me/{Var.UPDATES_CHANNEL}')]
         ]
+    
     )
     HELP_BUTTONS = InlineKeyboardMarkup(
         [[
