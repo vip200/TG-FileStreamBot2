@@ -16,7 +16,7 @@ import subprocess
 
 async def test_speed(update):
     # הרצת speedtest-cli בתהליך עם פלט בזמן אמת
-    process = subprocess.Popen(['speedtest-cli'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    process = subprocess.Popen(['speedtest-cli', '--secure'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     
     # יצירת הודעה ראשונית למשתמש
     msg = await update.message.reply_text("בודק מהירות... אנא המתן...") 
