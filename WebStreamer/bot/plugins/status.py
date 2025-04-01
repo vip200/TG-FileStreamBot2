@@ -19,19 +19,22 @@ start_recv = psutil.net_io_counters().bytes_recv
 async def reset_traffic_data():
     global start_sent, start_recv
     while True:
-        # חישוב הזמן הנותר עד 00:00
+        # חישוב הזמן הנותר עד תחילת החודש הבא
         now = datetime.now()
-        midnight = datetime.combine(now.date(), datetime.min.time()) + timedelta(days=1)
-        time_to_wait = (midnight - now).total_seconds()
-        
-        # המתנה עד שעה 00:00
+        next_month = now.replace(day=28) + timedelta(days=4)  # בחר את היום ה-28 של החודש הנוכחי
+        start_of_next_month = next_month.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+
+        time_to_wait = (start_of_next_month - now).total_seconds()
+
+        # המתנה עד תחילת החודש הבא
         await asyncio.sleep(time_to_wait)
-        
-        # לאחר הגעת השעה 00:00, נאפס את המידע על תעבורת הרשת
+
+        # לאחר הגעת היום הראשון של החודש הבא, נאפס את המידע על תעבורת הרשת
         start_sent = psutil.net_io_counters().bytes_sent
         start_recv = psutil.net_io_counters().bytes_recv
 
-        print("Network traffic data has been reset at midnight!")  # אפשר להוסיף הודעה כדי לבדוק אם זה קורה
+        print("Network traffic data has been reset at the beginning of the new month!")
+
 def status_bot():
     
     total_connected = sum(work_loads.values())
