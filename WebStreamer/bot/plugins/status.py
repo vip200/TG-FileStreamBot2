@@ -57,6 +57,40 @@ def status_bot():
     memory = psutil.virtual_memory().percent
     disk = psutil.disk_usage('/').percent
     
+    sys_stat = f"""<b>זמן ריצה של הבוט:</b> {uptime}
+<b>סך הכל נפח הדיסק:</b> {total}
+<b>שימוש:</b> {used}
+<b>פנוי:</b> {free}\n
+<b>העלאה:</b> {sent}
+<b>הורדה:</b> {recv}\n
+<b>מעבד:</b> {cpuUsage}% 
+<b>ראם:</b> {memory}% 
+<b>דיסק:</b> {disk}%\n
+<b>סך הכל לקוחות מחוברים:</b> {total_connected}\n"""
+    return sys_stat
+
+def status_bot_en():
+    
+    total_connected = sum(work_loads.values())
+    uptime = get_readable_time((time.time() - StartTime))
+    total, used, free = shutil.disk_usage('.')
+
+    total = humanbytes(total)
+    used = humanbytes(used)
+    free = humanbytes(free)
+
+    # נתוני תעבורת הרשת הנוכחיים
+    current_sent = psutil.net_io_counters().bytes_sent
+    current_recv = psutil.net_io_counters().bytes_recv
+
+    # חישוב ההפרש מאז שהסקריפט רץ
+    sent = humanbytes(current_sent - start_sent)
+    recv = humanbytes(current_recv - start_recv)
+
+    cpuUsage = psutil.cpu_percent(interval=0.5)
+    memory = psutil.virtual_memory().percent
+    disk = psutil.disk_usage('/').percent
+    
     sys_stat = f"""<b>Bot Uptime:</b> {uptime}
     <b>Total disk space:</b> {total}
     <b>Used:</b> {used}
@@ -66,8 +100,14 @@ def status_bot():
     <b>CPU:</b> {cpuUsage}% 
     <b>RAM:</b> {memory}% 
     <b>Disk:</b> {disk}%\n
-    <b>Total Connected Clients:</b> {total_connected}"""
+<b>Total Connected Clients:</b> {total_connected}\n"""
     return sys_stat
+
+
+
+
+
+
 @StreamBot.on_message(filters.command('status') & filters.private)
 async def start(b: Client, m: Message):
     lang = Language(m)
